@@ -1,11 +1,11 @@
 import argparse
+from util.util import *
 
 def main(path):
     if path is not None:
         assert path.endswith('.docx'), 'File must be a Word document (.docx)'
     else:
         raise ValueError("No file path provided.")
-
 
 
 

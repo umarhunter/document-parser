@@ -1,9 +1,9 @@
 import argparse
-#from util.util import *
+from util.util import *
 import sys
 import os
 import regex as re
-
+import yaml
 from dotenv import load_dotenv
 
 from pinecone.grpc import PineconeGRPC as Pinecone
@@ -42,9 +42,6 @@ def main(path):
     # Convert matches to a dictionary
     keywords_definitions = {keyword.strip(): definition.strip() for keyword, definition in matches}
 
-    # Example usage: print each keyword and its definition
-    for keyword, definition in keywords_definitions.items():
-        print(f"{keyword}: {definition}\n")
 
     # Open a new .txt file in write mode
     with open('keywords_definitions.txt', 'w') as file:
@@ -55,8 +52,12 @@ def main(path):
 
     file_path = 'keywords_definitions.txt'
     keywords_definitions = read_keywords_from_file(file_path)
-    print(keywords_definitions)
 
+    for keyword, definition in keywords_definitions.items():
+        filename = sanitize_filename(keyword) + '.yaml'
+        filename = "./results/" + filename
+        with open(filename, 'w') as file:
+            yaml.dump({keyword: definition}, file, default_flow_style=False)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Gather file names and ')
     parser.add_argument('--path', type=str, help='File path to a Word (.docx) document')

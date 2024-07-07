@@ -5,12 +5,15 @@ import os
 import regex as re
 import yaml
 from dotenv import load_dotenv
-
+from langchain_text_splitters import CharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+from langchain_pinecone import PineconeVectorStore
 from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
 
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import Docx2txtLoader
+
 
 def main(path):
     if path is not None:
@@ -42,7 +45,6 @@ def main(path):
     # Convert matches to a dictionary
     keywords_definitions = {keyword.strip(): definition.strip() for keyword, definition in matches}
 
-
     # Open a new .txt file in write mode
     with open('keywords_definitions.txt', 'w') as file:
         # Iterate through the keywords_definitions dictionary
@@ -58,6 +60,20 @@ def main(path):
         filename = "./results/" + filename
         with open(filename, 'w') as file:
             yaml.dump({keyword: definition}, file, default_flow_style=False)
+
+    loader = TextLoader("keywords_definitions.txt")
+    documents = loader.load()
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    docs = text_splitter.split_documents(documents)
+
+    vectorstore_from_texts = PineconeVectorStore.from_documents(
+        docs,
+        index_name=PINECONE_INDEX_NAME,
+        embedding=embeddings
+    )
+    vectorstore = PineconeVectorStore(index_name=PINECONE_INDEX_NAME, embedding=embeddings)
+    vectorstore.similarity_search(query)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Gather file names and ')
     parser.add_argument('--path', type=str, help='File path to a Word (.docx) document')

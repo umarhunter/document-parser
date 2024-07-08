@@ -70,13 +70,10 @@ To use `document-parser`, you need to have the following installed:
 - The Jupyter notebook (`document-parser.ipynb`) provides detailed explanations and insights into each step of the process.
 - The script should be run with file names that do not contain spaces for optimal performance.
 
-## Contributing
+## Contributing / Issues
 
-Please feel free to contribute! If interested, fork the repository and submit a pull request with your changes.
+Please feel free to contribute! If interested, fork the repository and submit a pull request with your changes. For any issues encountered, please feel free to submit them [here](https://github.com/umarhunter/document-parser/issues).
 
-## Contact
-
-For any issues encountered, please feel free to submit them [here](https://github.com/umarhunter/document-parser/issues).
 
 ## License
 

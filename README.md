@@ -5,7 +5,7 @@
 
 ## How It Works
 
-1. **Document Splitting**: The tool uses `regex` to parse and split the document into smaller chunks.
+1. **Document Splitting**: The tool uses `regex` and ```langchain``` to parse and split the document into smaller chunks.
 2. **Embedding and Storage**: The chunks are converted into vector representations using `langchain` and stored in PineconeDB.
 3. **Query and Retrieval**:
     - A user submits a query.

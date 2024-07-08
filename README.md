@@ -74,16 +74,10 @@ To use `document-parser`, you need to have the following installed:
 
 Please feel free to contribute! If interested, fork the repository and submit a pull request with your changes.
 
+## Contact
+
+For any issues encountered, please feel free to submit them [here](https://github.com/umarhunter/document-parser/issues).
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or issues, please open an issue on the repository or contact the project maintainers.
-
----
-
-By using `document-parser`, you agree to abide by the terms of the MIT License.
-
----
